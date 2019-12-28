@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+if [ ! -d ~/.local/bin ]; then
+  mkdir ~/.local/bin
+fi
+
+{{ if eq .chezmoi.os "linux" -}}
+
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ $(command -v brew) == "" ]]; then
+    echo "Installing Hombrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    echo "Updating Homebrew"
+    brew update
+    brew upgrade
+fi
+brew install ack mosh rclone restic thefuck vim unrar curl wget neofetch tmux
+{{ end -}}
+#Install antigen if it isn't installed
+if [ ! -d ~/.local/bin/antigen ]; then
+  echo "Cloning antigen"
+  git clone https://github.com/zsh-users/antigen ~/.local/bin/antigen
+fi
+
+#Install vundle for vim if it isn't installed
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+  echo "Cloning vundle"
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
+if [ ! -d ~/.local/bin/oh-my-tmux ]; then
+    echo "Installing oh-my-tmux"
+    git clone https://github.com/gpakosz/.tmux ~/.local/bin/oh-my-tmux
+fi
+
