@@ -1,0 +1,23 @@
+#!/bin/zsh
+{{ if eq .chezmoi.os "linux" -}}
+if [[ $(command -v apt-get) != ""]]; then
+    sudo apt-get -y update
+    sudo apt-get -y install 
+    sudo apt-get -y install ack-grep mosh rclone restic \
+    vim unrar curl wget neofetch tmux autojump
+    thefuck
+else
+    echo "Non-debian systems not currently supported"
+fi
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+if [[ $(command -v brew) == "" ]]; then
+    echo "Installing Hombrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    echo "Updating Homebrew"
+    brew update
+    brew upgrade
+fi
+brew install ack mosh rclone restic thefuck vim unrar curl wget neofetch tmux autojump
+{{ end -}}
