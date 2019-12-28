@@ -71,7 +71,7 @@ fi
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 eval "$(direnv hook zsh)"
-
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 function auto-retry()
 {
     false
