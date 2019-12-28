@@ -1,4 +1,4 @@
-source ~/bin/antigen/antigen.zsh
+source ~/.local/bin/antigen/antigen.zsh
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 POWERLEVEL9K_MODE=nerdfont-complete
 antigen use oh-my-zsh
@@ -37,10 +37,13 @@ setopt EXTENDED_GLOB
 #fi
 {{- if (eq .chezmoi.os "osx") }}
 antigen bundle osx
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.bin
 {{- end }}
 
 {{- if (eq .chezmoi.os "linux") }}
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.bin
 {{- if (eq (index .chezmoi "osRelease" "id") "ubuntu") }}
 export PATH=$PATH:/snap/bin
 antigen bundle ubuntu
