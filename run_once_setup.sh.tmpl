@@ -10,14 +10,18 @@ if [ ! -d ~/.local/bin/antigen ]; then
   git clone https://github.com/zsh-users/antigen ~/.local/bin/antigen
 fi
 
-#Install vundle for vim if it isn't installed
-if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
-  echo "Cloning vundle"
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
+# #Install vundle for vim if it isn't installed
+# if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+#   echo "Cloning vundle"
+#   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# fi
 
 if [ ! -d ~/.local/bin/oh-my-tmux ]; then
     echo "Installing oh-my-tmux"
     git clone https://github.com/gpakosz/.tmux ~/.local/bin/oh-my-tmux
 fi
 
+if [ ! -d ~/.vim_runtime ]; then
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  sh ~/.vim_runtime/install_awesome_vimrc.sh
+fi

@@ -1,0 +1,31 @@
+#!/bin/zsh
+function auto-retry()
+{
+    false
+    while [ $? -ne 0 ]; do
+        "$@" || (sleep 1;false)
+    done
+}
+
+function fix-fonts() {
+    echo "Upgrading to powerline fonts"
+    source ~/.p10k.zsh
+}
+
+# Make dir and cd into it with 'take' or just 'tk'
+function take() { mkdir -p $1; cd $1; }
+
+portslay () {
+    kill -9 `lsof -i tcp:$1 | tail -1 | awk '{ print $2;}'`
+}
+
+ips () {
+    # determine local IP address
+    ifconfig | grep "inet " | awk '{ print $2 }'
+}
+
+extip () {
+    # gather external ip address
+    echo -n "Current External IP: "
+    curl -s -m 5 https://ifconfig.co
+}
