@@ -9,6 +9,7 @@ function auto-retry()
 
 function fix-fonts() {
     echo "Upgrading to powerline fonts"
+    export LC_CLIENT_HAS_DOT_FILE_REPO=1
     source ~/.p10k.zsh
 }
 
