@@ -30,3 +30,7 @@ extip () {
     echo -n "Current External IP: "
     curl -s -m 5 https://ifconfig.co
 }
+
+docker_get_ip () {        
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
+}
