@@ -34,3 +34,7 @@ extip () {
 docker_get_ip () {        
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
 }
+
+dockerhere () {
+    docker run -ti -v `pwd`:/tmp
+}
