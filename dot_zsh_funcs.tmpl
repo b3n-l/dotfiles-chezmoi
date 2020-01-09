@@ -32,9 +32,16 @@ extip () {
 }
 
 docker_get_ip () {        
-    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
+    docker inspect -f {{`'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'`}} $1
 }
 
 dockerhere () {
-    docker run -ti -v `pwd`:/tmp
+    docker run -ti -v `pwd`:/tmp $@
+}
+
+push () {
+    curl -s -F "token={{(bitwarden "item" "pushover-chezmoi").login.password}}" \
+    -F "user={{(bitwarden "item" "pushover-chezmoi").login.username}}" \
+    -F "title=ZSH Sez" \
+    -F "message=$1" https://api.pushover.net/1/messages.json
 }
