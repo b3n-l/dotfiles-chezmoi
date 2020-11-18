@@ -33,3 +33,8 @@ updatekeys () {
     fi
     curl "https://github.com/benrlewis.keys" >> ~/.ssh/authorized_keys
 }
+
+# Aliases for counting words in git diff
+alias gitwa='git diff --word-diff=porcelain origin/master | grep -e "^+[^+]" | wc -w | xargs'
+alias gitwd='git diff --word-diff=porcelain origin/master | grep -e "^-[^-]" | wc -w | xargs'
+alias gitw='echo $(($(gitwa) - $(gitwd)))'
