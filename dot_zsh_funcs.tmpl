@@ -42,7 +42,6 @@ push () {
     -F "message=$1" https://api.pushover.net/1/messages.json
 }
 
-<<<<<<< HEAD
 getips() {
     if [ -z "$1" ]; then
         ip addr show | awk '/inet/ {printf "%-10s\t%s\n", $NF, $2}'
@@ -54,7 +53,6 @@ getips() {
 gitlab_get_merge_requests() {
     git --no-pager log $1..$2 --merges --pretty=format:'%h Merge Request: %b%n%s%n'
 }
-=======
 # Restart my buggy mouse app
 restartmouse() {
     PID=$(ps -eaf | grep LogiMgrDaemon | grep -v grep | awk '{print $2}')
@@ -63,4 +61,3 @@ restartmouse() {
     kill -9 "$PID"
     fi
 }
->>>>>>> d7faa28 (Add restartmouse for buggy logitech)
