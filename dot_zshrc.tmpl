@@ -26,6 +26,8 @@ antigen bundle iterm2
 antigen bundle python
 antigen bundle "rawkode/zsh-docker-run"
 antigen bundle notify
+antigen bundle multipass
+antigen bundle vi-mode
 export NVM_LAZY_LOAD=true
 NVM_SYMLINK_CURRENT=true
 antigen bundle lukechilds/zsh-nvm
@@ -57,8 +59,6 @@ antigen bundle debian
 
 antigen apply
 export EDITOR=vim
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 
 source ~/.zsh_paths
 source ~/.zsh_aliases

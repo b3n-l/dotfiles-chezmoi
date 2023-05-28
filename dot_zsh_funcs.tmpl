@@ -20,10 +20,6 @@ portslay () {
     kill -9 `lsof -i tcp:$1 | tail -1 | awk '{ print $2;}'`
 }
 
-ips () {
-    # determine local IP address
-    ifconfig | grep "inet " | awk '{ print $2 }'
-}
 
 extip () {
     # gather external ip address
@@ -36,7 +32,7 @@ docker_get_ip () {
 }
 
 dockerhere () {
-    docker run -ti -v `pwd`:/mnt/here $@
+    docker run -ti -v `pwd`:/mnt/here -w /mnt/here $@
 }
 
 push () {
@@ -44,4 +40,16 @@ push () {
     -F "user={{(bitwarden "item" "pushover-chezmoi").login.username}}" \
     -F "title=ZSH Sez" \
     -F "message=$1" https://api.pushover.net/1/messages.json
+}
+
+getips() {
+    if [ -z "$1" ]; then
+        ip addr show | awk '/inet/ {printf "%-10s\t%s\n", $NF, $2}'
+    else
+        ip addr show $1 | awk '/inet/ {printf "%-10s\t%s\n", $NF, $2}'
+    fi
+}
+
+gitlab_get_merge_requests() {
+    git --no-pager log $1..$2 --merges --pretty=format:'%h Merge Request: %b%n%s%n'
 }
