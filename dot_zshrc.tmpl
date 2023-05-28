@@ -14,9 +14,7 @@ antigen bundle pip
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle docker
-antigen bundle wd
 antigen bundle extract
-#antigen bundle dirhistory
 antigen bundle sudo
 antigen bundle vagrant
 antigen bundle web-search
@@ -28,6 +26,7 @@ antigen bundle "rawkode/zsh-docker-run"
 antigen bundle notify
 antigen bundle multipass
 antigen bundle vi-mode
+antigen bundle iterm2
 export NVM_LAZY_LOAD=true
 NVM_SYMLINK_CURRENT=true
 antigen bundle lukechilds/zsh-nvm
@@ -37,8 +36,8 @@ setopt EXTENDED_GLOB
  #antigen bundle brew
  #antigen bundle osx
 #fi
-{{- if (eq .chezmoi.os "osx") }}
-antigen bundle osx
+{{- if (eq .chezmoi.os "darwin") }}
+antigen bundle macos
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.bin
 {{- end }}
