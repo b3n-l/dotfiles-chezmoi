@@ -1,61 +1,50 @@
 source ~/.local/bin/antigen/antigen.zsh
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 POWERLEVEL9K_MODE=nerdfont-complete
-antigen use oh-my-zsh
-# antigen theme bhilburn/powerlevel9k powerlevel9k
-antigen theme romkatv/powerlevel10k
-#TODO check for autojump script
+
+antigen bundle "rawkode/zsh-docker-run"
 antigen bundle 256color
 antigen bundle autojump
-antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle bat
 antigen bundle colorize
-antigen bundle git
-antigen bundle pip
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle docker
-antigen bundle wd
 antigen bundle extract
-#antigen bundle dirhistory
-antigen bundle sudo
-antigen bundle vagrant
-antigen bundle web-search
-antigen bundle mosh
-antigen bundle thefuck
+antigen bundle git
 antigen bundle iterm2
-antigen bundle python
-antigen bundle "rawkode/zsh-docker-run"
-antigen bundle notify
+antigen bundle lukechilds/zsh-nvm
+antigen bundle mosh
 antigen bundle multipass
+antigen bundle notify
+antigen bundle pip
+antigen bundle python
+antigen bundle sudo
+antigen bundle thefuck
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+antigen bundle vagrant
 antigen bundle vi-mode
+antigen bundle web-search
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen theme romkatv/powerlevel10k
+antigen use oh-my-zsh
+
 export NVM_LAZY_LOAD=true
 NVM_SYMLINK_CURRENT=true
-antigen bundle lukechilds/zsh-nvm
 setopt EXTENDED_GLOB
-# OS X plugins
-#if [ `uname` = "Darwin" ]; then
- #antigen bundle brew
- #antigen bundle osx
-#fi
+
 {{- if (eq .chezmoi.os "osx") }}
-antigen bundle osx
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.bin
+    antigen bundle osx
 {{- end }}
 
 {{- if (eq .chezmoi.os "linux") }}
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.bin
-{{- if (eq (index .chezmoi "osRelease" "id") "ubuntu") }}
-export PATH=$PATH:/snap/bin
-antigen bundle ubuntu
+    {{- if (eq (index .chezmoi "osRelease" "id") "ubuntu") }}
+    export PATH=$PATH:/snap/bin
+    antigen bundle ubuntu
+    {{- end }}
+    {{- if (eq (index .chezmoi "osRelease" "id") "debian") }}
+    antigen bundle debian
+    {{- end }}
 {{- end }}
-{{- if (eq (index .chezmoi "osRelease" "id") "debian") }}
-antigen bundle debian
-{{- end }}
-{{- end }}
-
-#antigen theme agnoster
 
 antigen apply
 export EDITOR=vim
@@ -63,7 +52,6 @@ export EDITOR=vim
 source ~/.zsh_paths
 source ~/.zsh_aliases
 source ~/.zsh_funcs
-# source ~/.zsh_power9k
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -79,8 +67,6 @@ if [ -x "$(command -v neofetch)" ]; then
         neofetch
 fi
 
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-eval "$(direnv hook zsh)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Fall back mode for powerlevel10k when SSH-ing to server with dot-file-repo and
 # powerlevel10k installed, but dot-file-repo and fonts not available on client.
