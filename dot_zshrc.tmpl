@@ -31,9 +31,15 @@ antigen use oh-my-zsh
 export NVM_LAZY_LOAD=true
 NVM_SYMLINK_CURRENT=true
 setopt EXTENDED_GLOB
-
-{{- if (eq .chezmoi.os "osx") }}
-    antigen bundle osx
+# OS X plugins
+#if [ `uname` = "Darwin" ]; then
+ #antigen bundle brew
+ #antigen bundle osx
+#fi
+{{- if (eq .chezmoi.os "darwin") }}
+antigen bundle macos
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.bin
 {{- end }}
 
 {{- if (eq .chezmoi.os "linux") }}
